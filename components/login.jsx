@@ -57,7 +57,7 @@ const Login = () => {
       : (passwordRef.current.type = "text");
   };
   return (
-    <div>
+    <form>
       <label htmlFor="email">email</label>
       <input
         placeholder="max@mustermann.gmail.de"
@@ -70,7 +70,7 @@ const Login = () => {
       <input ref={passwordRef} id="email" type="password" maxLength="20" />
       <button onClick={handleVisibility}>show password</button>
       <button onClick={handleLogin}>login</button>
-    </div>
+    </form>
   );
 };
 
