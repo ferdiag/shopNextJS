@@ -6,8 +6,8 @@ const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+
   const handleLogin = async () => {
-    console.log(typeof 10);
     const email = emailRef.current.value.trim();
     const password = passwordRef.current.value.trim();
     if (email.length === 0 || password.length === 0) {

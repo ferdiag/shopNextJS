@@ -3,13 +3,12 @@ import React, { useRef, useState } from "react";
 import Login from "./login";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+
 const Navbar = () => {
   const [isNavShown, setIsNavShown] = useState(false);
-  console.log(isNavShown);
   const handleNavbar = () => {
     setIsNavShown(!isNavShown);
   };
-  console.log(isNavShown);
   return (
     <div className="fixed left-0 top-0 w-full z-10 ease-in duration-300">
       <div className="sm:flex hidden max-w-screen-xl z-10 m-auto justify-between items-center p-4 text-white">
