@@ -6,14 +6,16 @@ import { uuidv4 } from '../../../../../utils/uuid4'
 const AdminPage = () => {
     const baseSrc = "http://192.168.0.149:4000/uploads/uploads/"
     const [arrayOfPictues, setArrayOfPictues] = useState([])
-    console.log(arrayOfPictues)
-    const [input, setInput] = useState({
+    const initValuesInput =
+    {
         nameOfProduct: "",
         description: "",
         price: "",
         category: "",
         file: undefined
-    })
+    }
+
+    const [input, setInput] = useState(initValuesInput)
 
     useEffect(() => {
         (async () => {
@@ -96,6 +98,7 @@ const AdminPage = () => {
             throw new Error
         }
     }
+
     const DisplayArrayOfPictues = arrayOfPictues?.map((pic, index) => {
         const src = baseSrc.concat("", pic.id).concat(".", pic.fileType)
         return <div key={index}>
