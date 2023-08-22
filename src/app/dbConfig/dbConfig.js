@@ -9,12 +9,11 @@ const connect = async () => {
 
     db.on("error", console.error.bind(console, "connection error:"));
 
-    db.once("open", function () {
+    db.once("open", () => {
         console.log("Connection Successful!");
 
     });
-    const collection = await db.collection("pictures")
-    const res = await collection.find().toArray()
+
     return db
 }
 export { connect }

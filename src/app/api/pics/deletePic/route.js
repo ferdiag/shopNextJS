@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
 import { connect } from "../../../dbConfig/dbConfig"
-import { Picture } from "../../../../../models/picModel"
 import mongoose from "mongoose"
 
 const POST = async (req) => {

@@ -1,7 +1,9 @@
+"use client"
+import ErrorModal from '../../components/ErrorModal'
 import Navbar from '../../components/Navbar'
+import { StoreProvider } from './context/Store'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { StoreProvider } from "./context/mainContext"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,13 +16,15 @@ export default function RootLayout(props) {
   const { children } = props
   return (
     <html lang="en">
+
       <body className={inter.className}>
         <StoreProvider>
+          <ErrorModal />
           <Navbar />
           {children}
         </StoreProvider>
-
       </body>
+
     </html >
   )
 }

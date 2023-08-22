@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import Login from "./login";
+import Login from "./Form";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
@@ -21,10 +21,13 @@ const Navbar = () => {
             <Link href="/"></Link>
           </li>
           <li className=" p-4 ">
-            <Link href="/#Gallery"></Link>
+            <Link href="/shop">shop</Link>
           </li>
           <li className=" p-4 ">
-            <Link href="/#travels">Travels </Link>
+            <Link href="/travels">Travels </Link>
+          </li>
+          <li className=" p-4 ">
+            <Link href="/shoppingcard">Warenkorb</Link>
           </li>
           <li className=" p-4 ">
             <Link href="/">Contact</Link>

@@ -1,11 +1,9 @@
 "use client"
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { uuidv4 } from '../../../../../utils/uuid4'
+import { uuidv4 } from '../../../../utils/uuid4'
 
 const AdminPage = () => {
-    const baseSrc = "http://192.168.0.149:4000/uploads/uploads/"
-    const [arrayOfPictues, setArrayOfPictues] = useState([])
     const initValuesInput =
     {
         nameOfProduct: "",
@@ -14,8 +12,13 @@ const AdminPage = () => {
         category: "",
         file: undefined
     }
-
+    const baseSrc = "http://192.168.0.149:4000/uploads/uploads/"
+    const [arrayOfPictues, setArrayOfPictues] = useState([])
     const [input, setInput] = useState(initValuesInput)
+
+
+
+
 
     useEffect(() => {
         (async () => {
@@ -82,6 +85,7 @@ const AdminPage = () => {
         //get all except file and merge it with id and fileType
 
         const { file, ...rest } = input
+        console.log(rest)
         const payload = { ...rest, id, fileType }
 
         try {
@@ -113,13 +117,13 @@ const AdminPage = () => {
     })
 
     return (
-        <div style={{ marginTop: "500px" }}>
+        <div style={{ marginTop: "300px" }}>
             Admin
             <h3>neues Bild hochladen</h3>
             <form onSubmit={handleUpload}>
                 <label>Bilddatei</label>
                 <input onChange={e => handelChangeFileUpload(e)} type='file' name="file" accept="image/png, Image/jpg" />
-                <button onClick={handleUpload}>hochladen</button>
+
                 <label htmlFor='name'>Name</label>
                 <input style={{ border: "1px solid black" }} type='text' name='name' id='name' value={input.nameOfProduct} onChange={e => setInput(prevState => {
                     return { ...prevState, nameOfProduct: e.target.value }
@@ -139,7 +143,7 @@ const AdminPage = () => {
                 <input style={{ border: "1px solid black" }} type='number' name='price' id='price' value={input.price} onChange={e => setInput(prevState => {
                     return { ...prevState, price: e.target.value }
                 })} />
-
+                <button onClick={handleUpload}>hochladen</button>
             </form>
             <div>{DisplayArrayOfPictues}</div>
 
