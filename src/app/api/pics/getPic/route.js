@@ -9,18 +9,18 @@ const GET = async (req) => {
         const pictures = await Picture.find({})
 
         const collection = await db.collection("pictures")
-        const arrayOfPictues = await collection.find().toArray()
+        const arrayOfPictures = await collection.find().toArray()
         const headers = req.headers;
+
         return NextResponse.json({
             result: "success",
             message: "upload of photo was successful ",
             headers: headers,
-            arrayOfPictues
+            arrayOfPictures
         }, { status: 200 })
 
     } catch (err) {
     }
-
 }
 
 export { GET }

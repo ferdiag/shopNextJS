@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import { connect } from "../../../dbConfig/dbConfig";
 import { User } from "../../../models/userModel";
+import bcrypt, { hash } from "bcrypt";
 
 const POST = async (req) => {
   const headers = req.headers;
 
   const db = await connect();
   const data = await req.json();
-  const updatedData = { ...data, shoppingCard: [], sales: [] };
+  const saltRounds = 10;
 
   const userCollection = await db.collection("users");
   const user = await userCollection.findOne(
@@ -27,16 +28,26 @@ const POST = async (req) => {
   }
 
   try {
-    new User(updatedData).save();
+    const hash = await bcrypt.hash(data.password, saltRounds);
+    if (hash) {
+      const updatedData = {
+        ...data,
+        shoppingCard: [],
+        sales: [],
+        password: hash,
+      };
 
-    return NextResponse.json(
-      {
-        result: "success",
-        message: "Nutzer wurde erfolgreich gespeichert",
-        headers: headers,
-      },
-      { status: 200 }
-    );
+      new User(updatedData).save();
+
+      return NextResponse.json(
+        {
+          result: "success",
+          message: "Nutzer wurde erfolgreich gespeichert",
+          headers: headers,
+        },
+        { status: 200 }
+      );
+    }
   } catch (err) {
     console.log(err);
   }

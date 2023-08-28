@@ -16,7 +16,6 @@ export default function RootLayout(props) {
   const { children } = props
   return (
     <html lang="en">
-
       <body className={inter.className}>
         <StoreProvider>
           <ErrorModal />
@@ -24,7 +23,6 @@ export default function RootLayout(props) {
           {children}
         </StoreProvider>
       </body>
-
     </html >
   )
 }

@@ -1,9 +1,28 @@
 "use client"
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { uuidv4 } from '../../../../utils/uuid4'
-
+import DisplayProducts from "../../../../../components/displayArrays/DisplayProducts"
+import DisplayArrayOfUsers from "../../../../../components/displayArrays/DisplayArrayOfUsers"
+import { getProductHandler } from '../../../handlers/apiCalls/apiCallHandlers/getProductHandler'
+import { Store } from '../../../context/Store'
+import { newProductHandler } from "../../../handlers/apiCalls/apiCallHandlers/newProductHandler"
+import { apiCallHandler } from '../../../handlers/apiCalls/apicCallhandler'
+import { getUsersHandler } from "../../../handlers/apiCalls/apiCallHandlers/getUsersHandler"
+import { deleteUserHandler } from "../../../handlers/apiCalls/apiCallHandlers/deleteUserHandler"
 const AdminPage = () => {
+    const { state, dispatch } = useContext(Store)
+
+    //this useEffect is set up so that the shop page doesnt show the delete buttons.
+    useEffect(() => {
+        dispatch({
+            type: "SET_RESOURCE",
+            payload: "admin"
+        });
+    }, [])
+
+
+
     const initValuesInput =
     {
         nameOfProduct: "",
@@ -12,39 +31,8 @@ const AdminPage = () => {
         category: "",
         file: undefined
     }
-    const baseSrc = "http://192.168.0.149:4000/uploads/uploads/"
-    const [arrayOfPictues, setArrayOfPictues] = useState([])
     const [input, setInput] = useState(initValuesInput)
-
-
-
-
-
-    useEffect(() => {
-        (async () => {
-            const res = await axios.get("/api/pics/getPic")
-            const data = res.data
-            if (data.result === "success") {
-                setArrayOfPictues(data.arrayOfPictues)
-            }
-        })()
-    }, [setArrayOfPictues])
-
-    const handleDelete = async (e, i) => {
-
-        const payload = {
-            id: arrayOfPictues[i].id,
-            fileType: arrayOfPictues[i].fileType
-        }
-        console.log(payload)
-        await axios.post("http://192.168.0.149:4000/delete", payload).then(async (res) => {
-            if (res.data.result === "success") {
-                await axios.post("/api/pics/deletePic", { id: arrayOfPictues[i].id }).then((res) => {
-                    setArrayOfPictues(currentArray => currentArray.filter(item => item.id != res.data.id))
-                })
-            }
-        })
-    }
+    const [isUsersShown, setIsUserShown] = useState(false)
 
     const handelChangeFileUpload = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -57,7 +45,6 @@ const AdminPage = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        console.log(input)
         if (input.nameOfProduct.length === 0 ||
             input.description.length === 0 ||
             input.price.length === 0 ||
@@ -85,36 +72,29 @@ const AdminPage = () => {
         //get all except file and merge it with id and fileType
 
         const { file, ...rest } = input
-        console.log(rest)
         const payload = { ...rest, id, fileType }
 
         try {
             await axios.post("http://192.168.0.149:4000/uploads", data).then(async (res) => {
                 if (res.data.result === "success") {
-                    await axios.post("/api/pics/newPic", payload).then((res) => {
-                        if (res.data.result === "success") {
-                            setArrayOfPictues(currentArray => [...currentArray, res.data.dataOfNewPic])
-                        }
-                    })
+
+                    const props = {
+                        endpoint: "pics/newPic",
+                        payload: payload,
+                        apiCall: newProductHandler,
+                        state,
+                        dispatch,
+                        method: "post"
+                    }
+                    await apiCallHandler(props)
                 }
             });
         } catch (err) {
-            throw new Error
+            console.log(err)
         }
     }
 
-    const DisplayArrayOfPictues = arrayOfPictues?.map((pic, index) => {
-        const src = baseSrc.concat("", pic.id).concat(".", pic.fileType)
-        return <div key={index}>
-            <img src={src} alt="hallo welt" width={90} height={60} />
-            <p>{pic.name}</p>
-            <p>{pic.category}</p>
-            <p>{pic.description}</p>
-            <p>{pic.id}</p>
-            <p>{pic.price}</p>
-            <button onClick={(e) => handleDelete(e, index)}>X</button>
-        </div>
-    })
+
 
     return (
         <div style={{ marginTop: "300px" }}>
@@ -122,7 +102,7 @@ const AdminPage = () => {
             <h3>neues Bild hochladen</h3>
             <form onSubmit={handleUpload}>
                 <label>Bilddatei</label>
-                <input onChange={e => handelChangeFileUpload(e)} type='file' name="file" accept="image/png, Image/jpg" />
+                <input onChange={e => handelChangeFileUpload(e)} type='file' name="file" accept="image/jpg,image/png" />
 
                 <label htmlFor='name'>Name</label>
                 <input style={{ border: "1px solid black" }} type='text' name='name' id='name' value={input.nameOfProduct} onChange={e => setInput(prevState => {
@@ -145,9 +125,55 @@ const AdminPage = () => {
                 })} />
                 <button onClick={handleUpload}>hochladen</button>
             </form>
-            <div>{DisplayArrayOfPictues}</div>
+            <button onClick={async () => {
+                if (state.arrayOfPictures.length === 0) {
 
-        </div>
+                    const props = {
+                        endpoint: "pics/getPic",
+                        apiCall: getProductHandler,
+                        state,
+                        dispatch,
+                        method: "get"
+                    }
+                    await apiCallHandler(props)
+
+                    dispatch({
+                        type: "SET_IS_PRODUCT_SHOWN",
+                        payload: true
+                    });
+                    return
+                }
+
+                let payload = false
+                if (!state.isProductShown) {
+                    payload = true
+                }
+                dispatch({
+                    type: "SET_IS_PRODUCT_SHOWN",
+                    payload
+                });
+            }}>
+                {state.isProductShown ? "hide pictures" : "showPictures"}
+            </button>
+            {state.isProductShown && <DisplayProducts resource={state.resource} dispatch={dispatch} baseSrc={state.baseSrc} arrayOfPictures={state.arrayOfPictures} />}
+            <button onClick={async () => {
+                if (state.users.length === 0) {
+                    const props = {
+                        endpoint: "admin/getUsers",
+                        apiCall: getUsersHandler,
+                        state,
+                        dispatch,
+                        method: "get"
+                    }
+                    await apiCallHandler(props)
+                    setIsUserShown(true)
+                    return
+                }
+
+                setIsUserShown(prevState => !prevState)
+            }}>show Users</button>
+            {isUsersShown && <div><DisplayArrayOfUsers users={state.users} /></div>}
+        </div >
     )
 }
 

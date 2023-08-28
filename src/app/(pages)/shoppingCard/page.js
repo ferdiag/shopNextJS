@@ -4,7 +4,6 @@ import { Store } from '../../context/Store'
 import { handleAddShoppingcard } from '../../handlers/handleAddShoppingcard'
 const ShoppingCard = () => {
     const { state, dispatch } = useContext(Store)
-    const baseSrc = "http://192.168.0.149:4000/uploads/uploads/"
 
     console.log(state.shoppingCard)
     const handleDeleteFromShoppingcard = (e, index, state, dispatch) => {
@@ -23,8 +22,8 @@ const ShoppingCard = () => {
 
     }
 
-    const displayArrayOfPictues = state.shoppingCard.map((pic, index) => {
-        const src = baseSrc.concat("", pic.id).concat(".", pic.fileType)
+    const displayArrayOfPictures = state.shoppingCard.map((pic, index) => {
+        const src = state.baseSrc.concat("", pic.id).concat(".", pic.fileType)
 
         return <div key={index}><img src={src} alt="hallo welt" width={90} height={60} />
             <p>{pic.category}</p>
@@ -39,7 +38,7 @@ const ShoppingCard = () => {
     })
     return (
         <div style={{ marginTop: "200px" }}>{state.shoppingCard.length > 0 ?
-            displayArrayOfPictues : <div>Sie haben keine Waren im Warenkorb</div>
+            displayArrayOfPictures : <div>Sie haben keine Waren im Warenkorb</div>
         }
         </div>
     )

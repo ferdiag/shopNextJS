@@ -27,6 +27,9 @@ input{
   border-width: 1px;
   border-color: black;
 }
+dialog::backdrop {
+  background: rgba(33, 32, 32, 0.95);
+}
 
 
 

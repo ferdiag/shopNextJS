@@ -1,10 +1,14 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-    images: {
+const nextConfig = {
+    reactStrictMode: true,
+    swcMinify: true,
+    experimental: {
+        appDir: true,
+    }, images: {
         remotePatterns: [
             {
                 protocol: 'http',
-                hostname: '192.168.0.149:4000',
+                hostname: '192.168.0.149',
                 port: '4000',
                 pathname: '/uploads**',
             },
@@ -12,3 +16,4 @@ module.exports = {
     },
 }
 
+module.exports = nextConfig
