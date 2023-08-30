@@ -1,6 +1,7 @@
 import React from "react";
+import { deleteUserHandler } from "../../src/app/handlers/apiCalls/apiCallHandlers/deleteUserHandler";
 
-const DisplayArrayOfUsers = ({ users, handleDeleteUser }) => {
+const DisplayArrayOfUsers = ({ users }) => {
   const displayUsers = users.map((user, key) => {
     return (
       <div key={key}>

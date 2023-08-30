@@ -9,6 +9,8 @@ import { getProductHandler } from "../../handlers/apiCalls/apiCallHandlers/getPr
 const Shop = () => {
     const { state, dispatch } = useContext(Store)
 
+    //there dependency array isnt set because the function should be executed once the page gets loaded.
+
     useEffect(() => {
         (async () => {
             const props = {
@@ -19,31 +21,16 @@ const Shop = () => {
                 method: "get"
             }
             await apiCallHandler(props)
-
         })()
     }, [])
-
-    // const displayArrayOfPictures = state.arrayOfPictures.map((pic, index) => {
-    //     const src = baseSrc.concat("", pic.id).concat(".", pic.fileType)
-
-    //     return <div key={index}><img src={src} alt="hallo welt" width={90} height={60} />
-    //         <p>{pic.category}</p>
-    //         <p>{pic.name}</p>
-    //         <p>{pic.description}</p>
-    //         <p>{pic.id}</p>
-    //         <p>{pic.price}</p>
-    //         <button onClick={e => handleAddShoppingcard(e, index, state, dispatch)}>zum Warenkorb hinzufügen</button>
-    //     </div >
-    // })
+    console.log(state.arrayOfPictures)
     return (
         <div>
             {
                 state.arrayOfPictures.length === 0 ?
                     <div>es gibt keine Bilder</div>
                     :
-                    <div>
-                        <DisplayProducts resource={state.resource} dispatch={dispatch} arrayOfPictures={state.arrayOfPictures} baseSrc={state.baseSrc} />
-                    </div>
+                    <DisplayProducts resource={state.resource} dispatch={dispatch} arrayOfPictures={state.arrayOfPictures} baseSrc={state.baseSrc} />
             }
         </div>
     )

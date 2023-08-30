@@ -5,7 +5,6 @@ import { handleAddShoppingcard } from '../../handlers/handleAddShoppingcard'
 const ShoppingCard = () => {
     const { state, dispatch } = useContext(Store)
 
-    console.log(state.shoppingCard)
     const handleDeleteFromShoppingcard = (e, index, state, dispatch) => {
         let updateshoppingCard = []
         if (state.shoppingCard[index].amount != 0) {

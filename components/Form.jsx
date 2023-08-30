@@ -4,18 +4,21 @@ import React, { useRef, useState, useContext } from "react";
 import { Store } from "../src/app/context/Store";
 import { useRouter } from "next/navigation";
 
-const Login = (props) => {
+const Form = (props) => {
+  // handles submit and error for the Login and Signup.
+  //Errors will be stored in an Array and the errormodal will be triggered.
+  // state.modal.showModal() has to be used otherwise there is no backrop color.
+
   const router = useRouter();
-  const pathname = props.pathname.slice(1);
-  console.log(props.pathname);
+
   const emailRef = useRef(null);
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const passwordRepeatdRef = useRef(null);
+
   const { state, dispatch } = useContext(Store);
   const [isVisible, setIsVisible] = useState(false);
-
-  //set the focus to the first error, give all the input with errors a different color
+  const pathname = props.pathname.slice(1);
 
   const handleErrorStyle = (itemRef) => {
     errors.length === 0 && itemRef.current.focus();
@@ -141,7 +144,7 @@ const Login = (props) => {
             type: "SET_USER_DATA",
             payload: data.data.user,
           });
-          router.push("/dashboard");
+          router.push(`/dashboard/${data.data.user._id}`);
         }
       });
   };
@@ -198,4 +201,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Form;

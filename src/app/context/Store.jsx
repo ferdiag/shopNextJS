@@ -14,10 +14,15 @@ const globals = {
   resource: "",
   baseSrc: "http://192.168.0.149:4000/uploads/uploads/",
   isProductShown: false,
+  currentProduct: undefined,
 };
-console.log(globals.arrayOfPictures);
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_CURRENT_PRODUCT":
+      return {
+        ...state,
+        currentProduct: action.payload,
+      };
     case "SET_RESOURCE":
       return {
         ...state,

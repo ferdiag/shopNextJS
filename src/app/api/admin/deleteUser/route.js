@@ -4,8 +4,8 @@ import { ObjectId } from "mongoose"
 import { User } from "../../../models/userModel";
 const POST = async (req) => {
     const headers = req.headers;
-    console.log("delete user")
-    const db = await connect();
+
+    await connect();
     const data = await req.json();
     connect()
     try {
@@ -29,11 +29,19 @@ const POST = async (req) => {
                     id,
                     headers: headers,
                 },
-                { status: 200 }
+                { status: 401 }
             );
         }
     } catch (err) {
-        console.log(err);
+        return NextResponse.json(
+            {
+                result: "error",
+                message: "der User wurde nicht entfernt",
+                id: data._id,
+                headers: headers,
+            },
+            { status: 401 }
+        );
     }
 };
 export { POST };
