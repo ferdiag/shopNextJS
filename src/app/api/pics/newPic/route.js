@@ -16,7 +16,7 @@ const POST = async (req, res) => {
             headers: headers
         }, { status: 200 })
     }
-    const result = await Picture.findOne({ _id: data._id })
+    const result = await Picture.findOne({ id: data.id })
     const headers = req.headers;
 
     return NextResponse.json({

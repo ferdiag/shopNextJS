@@ -2,7 +2,7 @@ import { apiCallHandler } from "../apicCallhandler";
 import { getProductHandler } from "./getProductHandler";
 
 export const newProductHandler = async (res, state, dispatch) => {
-    //due to the fact that apiCallHandler is just called if the state.arrayOfPictures.length===0, this check has to be made to avoid bug.
+    //apiCallHandler is just called if the state.arrayOfPictures.length===0, this check has to be made to avoid bug.
 
     if (res.data.result === "success") {
         if (!state.isProductShown && state.arrayOfPictures.length != 0) {
