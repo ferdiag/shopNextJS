@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useRef, useState, useContext } from "react";
 import { Store } from "../src/app/context/Store";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Form = (props) => {
   // handles submit and error for the Login and Signup.
@@ -160,43 +161,73 @@ const Form = (props) => {
 
   return (
     <form
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-8/12 h-3/5 mt-3.5"
+      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-8/12 h-3/5 mt-3.5 justify-center "
       onSubmit={(e) => handleFormSubmit(e)}
     >
-      <label htmlFor="email">email</label>
-      <input
-        placeholder="max@mustermann.gmail.de"
-        ref={emailRef}
-        id="email"
-        type="email"
-        maxLength="20"
-        className="border-black-600 rounded"
-      />
-      <label htmlFor="password">Passwort</label>
-      <input ref={passwordRef} id="password" type="password" maxLength="20" />
-      <button onClick={handleVisibility}>show password</button>
-      {pathname === "signup" && (
-        <label htmlFor="passwordRepeatdRef">Passwort wiederholen</label>
-      )}{" "}
-      {pathname === "signup" && (
+      <div className="relative mb-4">
+        <label htmlFor="email">email</label>
         <input
-          ref={passwordRepeatdRef}
-          id="passwordRepeatdRef"
+          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+          placeholder="max@mustermann.gmail.de"
+          ref={emailRef}
+          id="email"
+          type="email"
+          maxLength="20"
+        />
+      </div>
+      <div className="relative mb-4">
+        <label htmlFor="password" className="leading-7 text-sm text-gray-600">
+          Passwort
+        </label>
+        <input
+          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+          ref={passwordRef}
+          id="password"
           type="password"
           maxLength="20"
         />
-      )}
-      {pathname === "signup" && <label htmlFor="username">Benutzername</label>}
+        <button onClick={handleVisibility}>show password</button>
+      </div>
+      <div className="relative mb-4">
+        {pathname === "signup" && (
+          <label
+            htmlFor="passwordRepeatdRef"
+            className="leading-7 text-sm text-gray-600"
+          >
+            Passwort wiederholen
+          </label>
+        )}
+        {pathname === "signup" && (
+          <input
+            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            ref={passwordRepeatdRef}
+            id="passwordRepeatdRef"
+            type="password"
+            maxLength="20"
+          />
+        )}
+      </div>
       {pathname === "signup" && (
-        <input
-          placeholder="Dein Benutzername"
-          ref={usernameRef}
-          id="username"
-          type="username"
-          maxLength="20"
-        />
+        <div className="relative mb-4">
+          <label htmlFor="username" className="leading-7 text-sm text-gray-600">
+            Benutzername
+          </label>
+
+          <input
+            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            placeholder="Dein Benutzername"
+            ref={usernameRef}
+            id="username"
+            type="username"
+            maxLength="20"
+          />
+        </div>
       )}
       <button onClick={(e) => handleFormSubmit(e)}>{pathname}</button>
+      <p>
+        wenn du noch keinen Account hast, dann kannst du dich hier{" "}
+        <Link href={"/signup"}>anmelden</Link>
+      </p>
     </form>
   );
 };

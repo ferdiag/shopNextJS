@@ -1,15 +1,33 @@
+import Image from "next/image";
 import React from "react";
 
 const Hero = ({ heading, message }) => {
   return (
-    <div className="flex items-center justify-center h-screen -z-20 bg-fixed bg-center bg-cover custom-img">
-      <div className="absolute top-0 -z-10 left-0 right-0 bottom-0 bg-black/60"></div>
-      <div className="items-center p-5 z-0 text-white mt-10 flex flex-col">
-        <h2 className="text-5xl font-bold">{heading}</h2>
-        <p className="py-5 text-xl">{message}</p>
-        <button className=" w-1/2 py-2 border rounded-2xl	">Gallery</button>
+    <section className="text-gray-600 body-font ">
+      <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col custom-image">
+        <Image
+          className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
+          alt="hero"
+          src="/background.jpg"
+          width={640}
+          height={420}
+        />
+        <div className="text-center lg:w-2/3 w-full">
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            {heading}{" "}
+          </h1>
+          <p className="mb-8 leading-relaxed">{message}</p>
+          <div className="flex justify-center">
+            <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              Button
+            </button>
+            <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+              Button
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

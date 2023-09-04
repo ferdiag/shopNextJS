@@ -1,3 +1,0 @@
-1.token integration
-2. implementing style from Tailblock
-3. comments
