@@ -17,4 +17,4 @@ Dieses Projekt soll potentiellen Arbeitgebern meine Fähigkeiten im Bereich Full
 
 ## Projektstatus
 
-Derzeit ist es möglich, Bilder und Benutzer hochzuladen, beziehungsweise anzulegen und wieder zu löschen. Ein Produkt erstellen und in dem Shop anzeigen zu lassen.
+Derzeit ist es möglich, Bilder und Benutzer hochzuladen, beziehungsweise anzulegen und wieder zu löschen. Ein Produkt erstellen und in dem Shop anzeigen zu lassen. Den Code für den Server finden Sie unter https://github.com/ferdiag/server.
