@@ -1,8 +1,8 @@
 # shopnextjs
 
-## Überblick
+## Overview
 
-Dieses Projekt soll potentiellen Arbeitgebern meine Fähigkeiten im Bereich Full-Stack Developement vernmitteln. Ziel des Projekts ist es eine Shop zu erstellen, auf potentielle Kunden meine Bilder erwerben können. Jeder User soll ich einen Account anlegen können, mit einer Wunschliste und der Übersicht über seine getätigten Käufe. Die Käufe sollen über einen Paypal-Button abgewickelt werden.
+his project is intended to convey my skills in full-stack development to potential employers. The aim of the project is to create a shop where potential customers can purchase my pictures. I want every user to be able to create an account with a wish list and an overview of their purchases. The purchases should be processed via a Paypal button.
 
 ## Frameworks, APIS und libraries
 
@@ -15,6 +15,7 @@ Dieses Projekt soll potentiellen Arbeitgebern meine Fähigkeiten im Bereich Full
 - CSS
 - MongoDB
 
-## Projektstatus
+## Project status
 
-Derzeit ist es möglich, Bilder und Benutzer hochzuladen, beziehungsweise anzulegen und wieder zu löschen. Ein Produkt erstellen und in dem Shop anzeigen zu lassen. Den Code für den Server finden Sie unter https://github.com/ferdiag/server.
+It is currently possible to upload, create and delete images and users. Furthermore you can create a product and display it in the shop. The code for the server can be found at
+https://github.com/ferdiag/server.
