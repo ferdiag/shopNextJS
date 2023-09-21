@@ -12,10 +12,6 @@ const Login = () => {
           <h1 className="title-font font-medium text-3xl text-gray-900">
             Melde dich mit deiner E-Mail und deinem Passwort an
           </h1>
-          {/* <p className="leading-relaxed mt-4">
-            Poke slow-carb mixtape knausgaard, typewriter street art gentrify
-            hammock starladder roathse. Craies vegan tousled etsy austin.
-          </p> */}
         </div>
         <Form pathname={pathname} />
       </div>
