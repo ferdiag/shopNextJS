@@ -13,7 +13,7 @@ const GET = async (req) => {
             result: "success",
             message: "upload of photo was successful ",
             headers: headers,
-            arrayOfPictures: pictures
+            arrayOfProducts: pictures
         }, { status: 200 })
 
     } catch (err) {

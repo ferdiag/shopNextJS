@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { Store } from '../../context/Store'
 import { handleAddShoppingcard } from '../../handlers/handleAddShoppingcard'
 import DisplayProducts from '../../../../components/displayArrays/DisplayProducts'
@@ -11,7 +11,7 @@ const Shop = () => {
 
     //there dependency array isnt set because the function should be executed once the page gets loaded.
 
-    useEffect(() => {
+    useMemo(() => {
         (async () => {
             const props = {
                 endpoint: "pics/getPic",
@@ -23,14 +23,13 @@ const Shop = () => {
             await apiCallHandler(props)
         })()
     }, [])
-    console.log(state.arrayOfPictures)
     return (
         <div>
             {
-                state.arrayOfPictures.length === 0 ?
+                state.arrayOfProducts.length === 0 ?
                     <div>es gibt keine Bilder</div>
                     :
-                    <DisplayProducts resource={state.resource} dispatch={dispatch} arrayOfPictures={state.arrayOfPictures} baseSrc={state.baseSrc} />
+                    <DisplayProducts resource={state.resource} dispatch={dispatch} arrayOfProducts={state.arrayOfProducts} baseSrc={state.baseSrc} />
             }
         </div>
     )

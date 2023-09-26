@@ -3,11 +3,11 @@ import { handleDeletePicture } from "../../src/app/handlers/handleDeletePictures
 import { useRouter } from "next/navigation";
 import { Store } from "../../src/app/context/Store";
 
-const DisplayProducts = ({ resource, baseSrc, arrayOfPictures }) => {
+const DisplayProducts = ({ resource, baseSrc, arrayOfProducts }) => {
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
-
-  const displayPictures = arrayOfPictures?.map((pic, index) => {
+  console.log(state.arrayOfProducts);
+  const displayPictures = arrayOfProducts?.map((pic, index) => {
     const src = baseSrc.concat("", pic.id).concat(".", pic.fileType);
 
     return (
@@ -17,9 +17,9 @@ const DisplayProducts = ({ resource, baseSrc, arrayOfPictures }) => {
         onClick={(e) => {
           dispatch({
             type: "SET_CURRENT_PRODUCT",
-            payload: arrayOfPictures[index],
+            payload: [index],
           });
-          router.push(`/shop/${arrayOfPictures[index].id}`);
+          router.push(`/shop/${arrayOfProducts[index].id}`);
         }}
       >
         <a className="block relative h-48 rounded overflow-hidden">
@@ -43,7 +43,7 @@ const DisplayProducts = ({ resource, baseSrc, arrayOfPictures }) => {
         {resource === "admin" && (
           <button
             onClick={(e) =>
-              handleDeletePicture(e, index, dispatch, arrayOfPictures)
+              handleDeletePicture(e, index, dispatch, arrayOfProducts)
             }
           >
             X
@@ -61,4 +61,4 @@ const DisplayProducts = ({ resource, baseSrc, arrayOfPictures }) => {
   );
 };
 
-export default DisplayProducts;
+export default React.memo(DisplayProducts);

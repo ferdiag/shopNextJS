@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 
 const UserProfil = (params) => {
   const { state, dispatch } = useContext(Store);
-  const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
 
-  console.log(state.userData);
+  const router = useRouter();
+
   return (
     <div style={{ marginTop: "100px" }}>
       <div>
