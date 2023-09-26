@@ -5,7 +5,7 @@ export const getProductHandler = async (res, _, dispatch) => {
     if (data.result === "success") {
         dispatch({
             type: "SET_ARRAY_OF_PICTURES",
-            payload: data.arrayOfPictures,
+            payload: data.arrayOfProducts,
         });
     }
 }

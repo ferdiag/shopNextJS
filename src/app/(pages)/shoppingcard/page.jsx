@@ -21,7 +21,7 @@ const ShoppingCard = () => {
     }
   };
 
-  const displayArrayOfPictures = state.shoppingCard.map((pic, index) => {
+  const displayarrayOfProducts = state.shoppingCard.map((pic, index) => {
     const src = state.baseSrc.concat("", pic.id).concat(".", pic.fileType);
 
     return (
@@ -51,7 +51,7 @@ const ShoppingCard = () => {
   return (
     <div style={{ marginTop: "200px" }}>
       {state.shoppingCard.length > 0 ? (
-        displayArrayOfPictures
+        displayarrayOfProducts
       ) : (
         <div>Sie haben keine Waren im Warenkorb</div>
       )}

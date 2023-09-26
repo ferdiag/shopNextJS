@@ -9,7 +9,7 @@ const globals = {
   modal: {},
   users: [],
   shoppingCard: [],
-  arrayOfPictures: [],
+  arrayOfProducts: [],
   userData: {},
   resource: "",
   baseSrc: "http://192.168.0.149:4000/uploads/uploads/",
@@ -56,7 +56,7 @@ const reducer = (state, action) => {
     case "SET_ARRAY_OF_PICTURES":
       return {
         ...state,
-        arrayOfPictures: action.payload,
+        arrayOfProducts: action.payload,
       };
     case "GET_USERS":
       return {

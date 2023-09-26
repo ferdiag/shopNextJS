@@ -6,7 +6,7 @@ import { Store } from "../../src/app/context/Store";
 const DisplayProducts = ({ resource, baseSrc, arrayOfProducts }) => {
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
-  console.log(state.arrayOfProducts);
+
   const displayPictures = arrayOfProducts?.map((pic, index) => {
     const src = baseSrc.concat("", pic.id).concat(".", pic.fileType);
 

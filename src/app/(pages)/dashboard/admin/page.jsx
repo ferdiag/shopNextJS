@@ -163,7 +163,7 @@ const AdminPage = () => {
       </form>
       <button
         onClick={async () => {
-          if (state.arrayOfPictures.length === 0) {
+          if (state.arrayOfProducts.length === 0) {
             const props = {
               endpoint: "pics/getPic",
               apiCall: getProductHandler,
@@ -197,7 +197,7 @@ const AdminPage = () => {
           resource={state.resource}
           dispatch={dispatch}
           baseSrc={state.baseSrc}
-          arrayOfPictures={state.arrayOfPictures}
+          arrayOfProducts={state.arrayOfProducts}
         />
       )}
       <button

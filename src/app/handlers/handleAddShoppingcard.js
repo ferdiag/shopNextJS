@@ -1,7 +1,7 @@
 export const handleAddShoppingcard = (e, i, state, dispatch) => {
     let newShoppingCard = []
 
-    const indexOfItem = state.shoppingCard.findIndex(item => item._id == state.arrayOfPictures[i]._id)
+    const indexOfItem = state.shoppingCard.findIndex(item => item._id == state.arrayOfProducts[i]._id)
 
     if (indexOfItem >= 0) {
         newShoppingCard = state.shoppingCard.with(
@@ -12,7 +12,7 @@ export const handleAddShoppingcard = (e, i, state, dispatch) => {
     } else {
         newShoppingCard = [
             ...state.shoppingCard, {
-                ...state.arrayOfPictures[i], amount: 1
+                ...state.arrayOfProducts[i], amount: 1
             }]
     }
 

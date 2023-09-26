@@ -26,7 +26,7 @@ const Shop = () => {
     return (
         <div>
             {
-                state.arrayOfProducts.length === 0 ?
+                state.arrayOfProducts?.length === 0 ?
                     <div>es gibt keine Bilder</div>
                     :
                     <DisplayProducts resource={state.resource} dispatch={dispatch} arrayOfProducts={state.arrayOfProducts} baseSrc={state.baseSrc} />
