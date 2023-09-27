@@ -3,17 +3,46 @@
 import React, { useContext, useEffect } from "react";
 import { Store } from "../../../context/Store";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { getProductHandler } from "../../../handlers/apiCalls/apiCallHandlers/getProductHandler";
+import { apiCallHandler } from "../../../handlers/apiCalls/apicCallhandler";
+import axios from "axios";
 
 const ProductPage = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const arrayPathname = pathname.split("/");
 
-  const { state, dispatch } = useContext(Store);
-  const { indexOfCurrentProduct, baseSrc } = state;
-  console.log(indexOfCurrentProduct);
+  const id = arrayPathname[arrayPathname.length - 1];
+
+  const {
+    state: { baseSrc, arrayOfProducts },
+    dispatch,
+  } = useContext(Store);
+
+  let arrayFetchRespnse = [];
+
+  const currentProduct = (
+    arrayOfProducts.length > 0 ? arrayOfProducts : arrayFetchRespnse
+  ).find((product) => product.id === id);
+
+  //avoiding a crash after reload of page
+
+  if (arrayOfProducts.length === 0) {
+    (async () => {
+      const res = await axios.get("/api/pics/getPic");
+      dispatch({
+        type: "SET_ARRAY_OF_PICTURES",
+        payload: res.data.arrayOfProducts,
+      });
+    })();
+    return <div>...loading</div>;
+  }
 
   const src = baseSrc
-    .concat("", state.arrayOf.id)
+    .concat("", currentProduct.id)
     .concat(".", currentProduct.fileType);
+
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">

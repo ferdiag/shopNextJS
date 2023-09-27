@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import { handleDeletePicture } from "../../src/app/handlers/handleDeletePictures";
 import { useRouter } from "next/navigation";
@@ -17,7 +18,7 @@ const DisplayProducts = ({ resource, baseSrc, arrayOfProducts }) => {
         onClick={(e) => {
           dispatch({
             type: "SET_CURRENT_PRODUCT",
-            payload: [index],
+            payload: index,
           });
           router.push(`/shop/${arrayOfProducts[index].id}`);
         }}
