@@ -7,6 +7,7 @@ import axios from "axios";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import updateProductHandler from "../../../handlers/./apiCalls/apiCallHandlers/updateProductHandler";
 import { apiCallHandler } from "../../../handlers/apiCalls/apicCallhandler";
+
 const ProductPage = () => {
   const [isLiked, setIsLiked] = useState(false);
   const pathname = usePathname();
@@ -17,7 +18,7 @@ const ProductPage = () => {
   const { baseSrc, arrayOfProducts } = state;
 
   const currentProduct = arrayOfProducts.find((product) => product.id === id);
-  console.log(id);
+
   //avoiding a crash after reload of page
 
   if (arrayOfProducts.length === 0) {

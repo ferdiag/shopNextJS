@@ -11,9 +11,9 @@ const DisplayTypes = ({ arrayOfProducts, setShownProducts }) => {
   const handleSearch = (e, i) => {
     const targetCategory = categories[i];
     const searchParamsString = searchParams.toString();
-    console.log(searchParamsString, searchParamsString === "all+Products");
-    const extractingVal = searchParamsString.split("=")[1];
 
+    const extractingVal = searchParamsString.split("=")[1];
+    console.log(searchParamsString, extractingVal === "all+Products");
     const filteredProducts = arrayOfProducts.filter(
       ({ category }) => category === targetCategory
     );

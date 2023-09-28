@@ -6,11 +6,29 @@ import DisplayProducts from '../../../../components/displayArrays/DisplayProduct
 import { apiCallHandler } from '../../handlers/apiCalls/apicCallhandler'
 import { getProductHandler } from "../../handlers/apiCalls/apiCallHandlers/getProductHandler"
 import DisplayTypes from "../../../../components/displayArrays/DisplayTypes"
+import { useSearchParams } from 'next/navigation'
 const Shop = () => {
     const { state, dispatch } = useContext(Store)
     const { arrayOfProducts, resource, baseSrc } = state
     const [shownProducts, setShownProducts] = useState(arrayOfProducts);
+    const searchParams = useSearchParams();
 
+    useEffect(() => {
+        const hasParams = searchParams.toString().length > 0
+
+        if (hasParams) {
+            const searchParamsString = searchParams.toString();
+            const extractingVal = searchParamsString.split("=")[1];
+
+
+            const filteredProducts = arrayOfProducts.filter(
+                ({ category }) => category === extractingVal
+            );
+            const newArrayProducts =
+                extractingVal === "all+Products" ? arrayOfProducts : filteredProducts;
+            setShownProducts(newArrayProducts);
+        }
+    }, [setShownProducts, arrayOfProducts, searchParams])
     //there dependency array isnt set because the function should be executed once the page gets loaded.
 
     useEffect(() => {
@@ -24,7 +42,9 @@ const Shop = () => {
             }
             await apiCallHandler(props)
         })()
+
     }, [])
+
     return (
         <section>
             {
