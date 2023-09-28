@@ -1,26 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { handleDeletePicture } from "../../src/app/handlers/handleDeletePictures";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Store } from "../../src/app/context/Store";
 
-const DisplayProducts = ({ resource, baseSrc, arrayOfProducts }) => {
+const DisplayProducts = ({
+  resource,
+  baseSrc,
+  arrayOfProducts,
+  shownProducts,
+}) => {
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
+  const pathName = usePathname();
 
-  const displayPictures = arrayOfProducts?.map((pic, index) => {
+  const displayPictures = shownProducts.map((pic, index) => {
     const src = baseSrc.concat("", pic.id).concat(".", pic.fileType);
-
     return (
       <div
         key={index}
         className="lg:w-1/4 md:w-1/2 p-4 w-full"
-        onClick={(e) => {
-          dispatch({
-            type: "SET_CURRENT_PRODUCT",
-            payload: index,
-          });
-          router.push(`/shop/${arrayOfProducts[index].id}`);
+        onClick={() => {
+          router.push(`${pathName}/${pic.id}`);
         }}
       >
         <a className="block relative h-48 rounded overflow-hidden">

@@ -13,12 +13,11 @@ const ProductPage = () => {
   const arrayPathname = pathname.split("/");
 
   const id = arrayPathname[arrayPathname.length - 1];
-
   const { state, dispatch } = useContext(Store);
   const { baseSrc, arrayOfProducts } = state;
 
   const currentProduct = arrayOfProducts.find((product) => product.id === id);
-  console.log(currentProduct);
+  console.log(id);
   //avoiding a crash after reload of page
 
   if (arrayOfProducts.length === 0) {

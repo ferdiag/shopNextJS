@@ -5,13 +5,15 @@ import { handleAddShoppingcard } from '../../handlers/handleAddShoppingcard'
 import DisplayProducts from '../../../../components/displayArrays/DisplayProducts'
 import { apiCallHandler } from '../../handlers/apiCalls/apicCallhandler'
 import { getProductHandler } from "../../handlers/apiCalls/apiCallHandlers/getProductHandler"
-
+import DisplayTypes from "../../../../components/displayArrays/DisplayTypes"
 const Shop = () => {
     const { state, dispatch } = useContext(Store)
+    const { arrayOfProducts, resource, baseSrc } = state
+    const [shownProducts, setShownProducts] = useState(arrayOfProducts);
 
     //there dependency array isnt set because the function should be executed once the page gets loaded.
 
-    useMemo(() => {
+    useEffect(() => {
         (async () => {
             const props = {
                 endpoint: "pics/getPic",
@@ -24,14 +26,19 @@ const Shop = () => {
         })()
     }, [])
     return (
-        <div>
+        <section>
             {
                 state.arrayOfProducts?.length === 0 ?
                     <div>es gibt keine Bilder</div>
-                    :
-                    <DisplayProducts resource={state.resource} dispatch={dispatch} arrayOfProducts={state.arrayOfProducts} baseSrc={state.baseSrc} />
+
+                    : <>
+                        <DisplayTypes shownProducts={shownProducts} setShownProducts={setShownProducts} arrayOfProducts={arrayOfProducts} />
+                        <DisplayProducts shownProducts={shownProducts} resource={resource} dispatch={dispatch} arrayOfProducts={state.arrayOfProducts} baseSrc={baseSrc} />
+                    </>
             }
-        </div>
+
+
+        </section>
     )
 }
 
