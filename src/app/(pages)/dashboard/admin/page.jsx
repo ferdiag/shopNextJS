@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { uuidv4 } from "../../../../utils/uuid4";
+import { uuidv4 } from "../../../uuid4/index";
 import DisplayProducts from "../../../../../components/displayArrays/DisplayProducts";
 import DisplayArrayOfUsers from "../../../../../components/displayArrays/DisplayArrayOfUsers";
 import { getProductHandler } from "../../../handlers/apiCalls/apiCallHandlers/getProductHandler";
@@ -10,6 +10,7 @@ import { newProductHandler } from "../../../handlers/apiCalls/apiCallHandlers/ne
 import { apiCallHandler } from "../../../handlers/apiCalls/apicCallhandler";
 import { getUsersHandler } from "../../../handlers/apiCalls/apiCallHandlers/getUsersHandler";
 import { deleteUserHandler } from "../../../handlers/apiCalls/apiCallHandlers/deleteUserHandler";
+
 const AdminPage = () => {
   const { state, dispatch } = useContext(Store);
 
@@ -19,10 +20,11 @@ const AdminPage = () => {
       type: "SET_RESOURCE",
       payload: "admin",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const initValuesInput = {
-    nameOfProduct: "",
+    name: "",
     description: "",
     price: "",
     category: "",
@@ -44,7 +46,7 @@ const AdminPage = () => {
     e.preventDefault();
 
     if (
-      input.nameOfProduct.length === 0 ||
+      input.name.length === 0 ||
       input.description.length === 0 ||
       input.price.length === 0 ||
       input.category.length === 0
@@ -116,7 +118,7 @@ const AdminPage = () => {
           value={input.nameOfProduct}
           onChange={(e) =>
             setInput((prevState) => {
-              return { ...prevState, nameOfProduct: e.target.value };
+              return { ...prevState, name: e.target.value };
             })
           }
         />
@@ -165,7 +167,7 @@ const AdminPage = () => {
         onClick={async () => {
           if (state.arrayOfProducts.length === 0) {
             const props = {
-              endpoint: "pics/getPic",
+              endpoint: "pics/getProduct",
               apiCall: getProductHandler,
               state,
               dispatch,

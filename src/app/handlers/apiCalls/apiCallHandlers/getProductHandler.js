@@ -1,11 +1,15 @@
 
 export const getProductHandler = async (res, _, dispatch) => {
     const data = res.data
-    console.log(data)
+    const arrayWithIsLiked = data.arrayOfProducts.map(product => {
+        return {
+            ...product, isLiked: false
+        }
+    })
     if (data.result === "success") {
         dispatch({
-            type: "SET_ARRAY_OF_PICTURES",
-            payload: data.arrayOfProducts,
+            type: "SET_ARRAY_OF_PRODUCTS",
+            payload: arrayWithIsLiked,
         });
     }
 }

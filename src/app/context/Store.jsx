@@ -47,7 +47,7 @@ const reducer = (state, action) => {
         ...state,
         shoppingCard: action.payload,
       };
-    case "SET_ARRAY_OF_PICTURES":
+    case "SET_ARRAY_OF_PRODUCTS":
       return {
         ...state,
         arrayOfProducts: action.payload,

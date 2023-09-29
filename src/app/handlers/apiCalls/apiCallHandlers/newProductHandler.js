@@ -6,20 +6,20 @@ export const newProductHandler = async (res, state, dispatch) => {
 
     if (res.data.result === "success") {
         if (!state.isProductShown && state.arrayOfProducts.length != 0) {
-            const getPicProps = {
-                endpoint: "pics/getPic",
+            const getProductProps = {
+                endpoint: "pics/getProduct",
                 apiCall: getProductHandler,
                 state,
                 dispatch,
                 method: "get"
             }
-            await apiCallHandler(getPicProps)
+            await apiCallHandler(getProductProps)
             return
         }
 
         const newArrayOfPics = [...state.arrayOfProducts, res.data.dataOfNewPic]
         dispatch({
-            type: "SET_ARRAY_OF_PICTURES",
+            type: "SET_ARRAY_OF_PRODUCTS",
             payload: newArrayOfPics
         });
     }

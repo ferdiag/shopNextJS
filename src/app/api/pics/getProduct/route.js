@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { connect } from "../../../dbConfig/dbConfig"
-import mongoose from "mongoose";
 import { Picture } from "../../../models/picModel"
 
 const GET = async (req) => {

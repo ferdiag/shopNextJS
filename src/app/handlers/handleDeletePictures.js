@@ -11,7 +11,7 @@ const handleDeletePicture = async (e, i, dispatch, arrayOfProducts) => {
                 console.log(res.data.id)
                 const newPicArray = arrayOfProducts.filter(pic => pic.id !== res.data.id)
                 dispatch({
-                    type: "SET_ARRAY_OF_PICTURES",
+                    type: "SET_ARRAY_OF_PRODUCTS",
                     payload: newPicArray
                 });
             })

@@ -1,5 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useMemo, useState } from 'react'
+
 import { Store } from '../../context/Store'
 import { handleAddShoppingcard } from '../../handlers/handleAddShoppingcard'
 import DisplayProducts from '../../../../components/displayArrays/DisplayProducts'
@@ -10,8 +11,13 @@ import { useSearchParams } from 'next/navigation'
 const Shop = () => {
     const { state, dispatch } = useContext(Store)
     const { arrayOfProducts, resource, baseSrc } = state
-    const [shownProducts, setShownProducts] = useState(arrayOfProducts);
+    const [shownProducts, setShownProducts] = useState([]);
     const searchParams = useSearchParams();
+
+    useEffect(() => {
+        setShownProducts(arrayOfProducts)
+    }, [arrayOfProducts])
+    //this useEffect handels the displayed products after reload.
 
     useEffect(() => {
         const hasParams = searchParams.toString().length > 0
@@ -28,12 +34,13 @@ const Shop = () => {
             setShownProducts(newArrayProducts);
         }
     }, [setShownProducts, arrayOfProducts, searchParams])
+
     //there dependency array isnt set because the function should be executed once the page gets loaded.
 
     useEffect(() => {
         (async () => {
             const props = {
-                endpoint: "pics/getPic",
+                endpoint: "pics/getProduct",
                 apiCall: getProductHandler,
                 state,
                 dispatch,
@@ -41,7 +48,6 @@ const Shop = () => {
             }
             await apiCallHandler(props)
         })()
-
     }, [])
 
     return (

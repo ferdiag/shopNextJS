@@ -5,9 +5,10 @@ import { Picture } from "../../../models/picModel"
 const POST = async (req, res) => {
     const db = await connect()
     const data = await req.json()
+    const dataWithLikes = { ...data, likes: 0 }
 
     try {
-        new Picture(data).save()
+        new Picture(dataWithLikes).save()
     } catch (err) {
         return NextResponse.json({
             result: "error",
