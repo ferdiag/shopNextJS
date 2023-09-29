@@ -20,7 +20,6 @@ const Shop = () => {
             const searchParamsString = searchParams.toString();
             const extractingVal = searchParamsString.split("=")[1];
 
-
             const filteredProducts = arrayOfProducts.filter(
                 ({ category }) => category === extractingVal
             );
