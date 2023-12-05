@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Store } from "../src/app/context/Store";
 
-const ErrorModal = (props) => {
+const ErrorModal = () => {
   //modal will be triggered by other components. An id has to be set for detecting a click on the backdrop.
 
   const modalRef = useRef();

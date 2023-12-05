@@ -49,7 +49,7 @@ const POST = async (req) => {
       );
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 export { POST };

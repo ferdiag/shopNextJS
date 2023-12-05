@@ -125,7 +125,6 @@ const Form = (props) => {
         pathname,
       })
       .then((data) => {
-        console.log(data);
         if (
           (data.data.result === "error") &
           (data.data.pathname === "signup")

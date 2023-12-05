@@ -9,7 +9,6 @@ import { Store } from "../../../context/Store";
 import { newProductHandler } from "../../../handlers/apiCalls/apiCallHandlers/newProductHandler";
 import { apiCallHandler } from "../../../handlers/apiCalls/apicCallhandler";
 import { getUsersHandler } from "../../../handlers/apiCalls/apiCallHandlers/getUsersHandler";
-import { deleteUserHandler } from "../../../handlers/apiCalls/apiCallHandlers/deleteUserHandler";
 
 const AdminPage = () => {
   const { state, dispatch } = useContext(Store);
@@ -20,7 +19,6 @@ const AdminPage = () => {
       type: "SET_RESOURCE",
       payload: "admin",
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const initValuesInput = {
@@ -51,12 +49,12 @@ const AdminPage = () => {
       input.price.length === 0 ||
       input.category.length === 0
     ) {
-      console.log("Bitte alle Felder ausfüllen");
+      alert("Bitte alle Felder ausfüllen");
       return;
     }
 
     if (!input.file) {
-      console.log("du hast keine Datei hochgeladen");
+      alert("du hast keine Datei hochgeladen");
       return;
     }
     const mimeType = input.file.type;

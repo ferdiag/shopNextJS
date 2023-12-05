@@ -13,7 +13,6 @@ const DisplayTypes = ({ arrayOfProducts, setShownProducts }) => {
     const searchParamsString = searchParams.toString();
 
     const extractingVal = searchParamsString.split("=")[1];
-    console.log(searchParamsString, extractingVal === "all+Products");
     const filteredProducts = arrayOfProducts.filter(
       ({ category }) => category === targetCategory
     );

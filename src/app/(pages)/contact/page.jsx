@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+// Die Contact-Komponente für das Kontaktformular.
 
 const Contact = () => {
   const [input, setInput] = useState({
@@ -7,7 +8,6 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  console.log(input);
   return (
     <section className="text-gray-600 body-font relative">
       <div className="container px-5 py-24 mx-auto">
